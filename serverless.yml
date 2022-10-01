@@ -14,5 +14,12 @@ functions:
       - httpApi:
           path: /
           method: get
+  createToken:
+    handler: src/controllers/token.createToken
+    name: ${sls:stage}-createToken
+    events:
+      - httpApi:
+          path: /tokens
+          method: post
 plugins:
   - serverless-plugin-typescript
