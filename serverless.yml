@@ -6,6 +6,9 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs14.x
+  environment:
+    AUTH_KEY : pk_test_Dt4ZBItXSZT1EzmOd8yCxonL
+    DATABASE_PWD : RgKlvHbj5KzsS2Pz
 
 functions:
   getCardData:
