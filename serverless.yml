@@ -8,11 +8,12 @@ provider:
   runtime: nodejs14.x
 
 functions:
-  hello:
-    handler: handler.hello
+  getCardData:
+    handler: src/controllers/getCardData.getCardData
+    name: ${sls:stage}-getCardData
     events:
       - httpApi:
-          path: /
+          path: /cardData
           method: get
   createToken:
     handler: src/controllers/token.createToken

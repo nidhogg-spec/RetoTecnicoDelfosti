@@ -141,8 +141,6 @@ const add = (data:ClientData,pkData:string) =>{
     try {
       await client.connect();
       const token = jwt.sign({data: 'foobar'},pkData,{ expiresIn: 100 * 9 });
-      console.log('-------------')
-      console.log(data)
       const collection = client.db("RetoTecnicoDelfosti").collection("Users");
       const documentData = {
         card_number: data.card_number,
@@ -177,12 +175,6 @@ const createToken = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxy
     } else {
       throw new Error("No hay un objeto data en los parametros");
     }
-    // const tokenData = JSON.stringify(event.body)
-    // const value = validateCardNumber(tokenData.card_number)
-    // console.log('-----------------')
-    // console.log(event.body)
-    // console.log(tokenData)
-    // client.connect(err => {
     return{
       statusCode: 200,
       body: JSON.stringify({
@@ -192,8 +184,6 @@ const createToken = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxy
       }) 
     }
   } catch (error) {
-    console.log('************************')
-    console.log(error)
     return {
       statusCode: 500,
       body: error.message
