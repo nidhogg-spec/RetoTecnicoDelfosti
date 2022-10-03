@@ -12,5 +12,5 @@
 ## Consideraciones
   Asegurase que el valor del header de authenticacion sea el mismo que el de la variable de entorno AUTH_KEY del archivo serverless.yml, solo el valor de la llave sin considerar el prefijo del token, por ejemplo la llave con el prefijo seria `bearer pk_test_Dt4ZBItXSZT1EzmOd8yCxonL` solo asegurar similitud con `pk_test_Dt4ZBItXSZT1EzmOd8yCxonL`. Teniendo en cuenta esto el valor de la variable de entorno seria `AUTH_KEY: pk_test_Dt4ZBItXSZT1EzmOd8yCxonL`.
 
-  En el caso de ls unit test asegurarse de añadirle las variables de entorno antes de ejecutar el npm test como se observa aca en el siguiente ejemplo
+  En el caso de ls unit test asegurarse de añadirle las variables de entorno antes de ejecutar el npm test como se observa aca en el siguiente ejemplo, de igual manera el header authentication debe ser el mismo para el caso de los test tambien.
   ```DATABASE_PWD=RgKlvHbj5KzsS2Pz AUTH_KEY=pk_test_Dt4ZBItXSZT1EzmOd8yCxonL npm test```
