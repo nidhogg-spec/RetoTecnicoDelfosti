@@ -9,5 +9,4 @@ const config: Config = {
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
 };
-
 export default config;
