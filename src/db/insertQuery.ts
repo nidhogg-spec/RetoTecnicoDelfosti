@@ -27,13 +27,12 @@ export const insertData = (data:ClientData,pkData:string) =>{
         email: data.email,
         token: token
       }
-      collection.insertOne(documentData).then((result)=>{
+      collection.insertOne(documentData).then(()=>{
         client.close()
-        resolve(result.insertedId)
-
+        resolve(token)
       });
     } catch (error) {
-      reject(new Error(error))
+      reject({error: error, statusCode:500});
     }
   });
 }
@@ -43,13 +42,13 @@ export const getData = (token: any) =>{
       const collection = client.db("RetoTecnicoDelfosti").collection("Users");
       const query = {token: token.token}
       const options = {
-        projection: { _id: 0, email: 1, card_number: 1, expiration_year: 1, expiration_month: 1,token: 1 },
+        projection: { _id: 0, email: 1, card_number: 1, expiration_year: 1, expiration_month: 1 },
       };
 
       collection.findOne(query,options).then((response)=>{
         jwt.verify(token.token,authKey,function(err: any, decoded: any){
           if (err) {
-            reject(new Error(err))
+            reject({error: new Error(err), statusCode:403})
           }else{
             client.close()
             resolve(response);
@@ -57,7 +56,7 @@ export const getData = (token: any) =>{
         })
       })
     } catch (error) {
-      reject(new Error(error))
+      reject({error: error, statusCode:500});
     }
   });
 }

@@ -3,5 +3,6 @@ export interface ClientData {
   card_number: number ,
   cvv: number,
   expiration_year: string,
-  expiration_month: string
+  expiration_month: string,
+  token: string
 }

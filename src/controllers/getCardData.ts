@@ -1,7 +1,5 @@
-import { APIGatewayProxyEvent, APIGatewayProxyEventQueryStringParameters, APIGatewayProxyResult } from "aws-lambda";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { getData } from "../db/insertQuery";
-
-const dbPWD = process.env.DATABASE_PWD;
 
 const getCardData = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> =>{
   try {
@@ -9,7 +7,7 @@ const getCardData = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxy
     if (event.queryStringParameters != null) {
       cardData = await getData(event.queryStringParameters)
     } else {
-      throw new Error("No hay un objeto data en los parametros");
+      throw {error: new Error("No hay un objeto data en los parametros"), statusCode:400}
     }
     return{
       statusCode: 200,
@@ -19,8 +17,8 @@ const getCardData = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxy
     }
   } catch (error) {
     return{
-      statusCode: 500,
-      body: error.message
+      statusCode: error.statusCode,
+      body: error.error.message
     }
   }
   

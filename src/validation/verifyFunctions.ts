@@ -87,27 +87,27 @@ function verifyEmail(email:string){
 }
 
 export var verifyPkBearerToken = (authorization: string | undefined) =>{
-  return new Promise<string>(async(resolve,reject)=>{
+  return new Promise<any>(async(resolve,reject)=>{
     if (authorization !== undefined) {
-      const validToken = authorization.split(' ')
-      resolve(validToken[1]);
+      const validToken = authorization?.split(' ')
+      resolve({data:validToken[1],statusCode:202});
     } else {
-      reject(new Error('pk Token inexistente'));
+      reject({error: new Error('pk Token inexistente'), statusCode:417});
     }
   })
 }
 
 export var verifyClientData = (data:any)=>{
-  return new Promise<string>(async(resolve,reject)=>{
+  return new Promise<any>(async(resolve,reject)=>{
     try {
       await verifyCardNumber(data.card_number);
       await verifyCVV(data.cvv);
       await verifyExpMonth(data.expiration_month);
       await verifyExpYear(data.expiration_year);
       await verifyEmail(data.email);
-      resolve('Ok');
+      resolve({message:'Ok',statusCode:202});
     } catch (error) {
-      reject(error);
+      reject({error: error,statusCode:400});
     } 
   })
   

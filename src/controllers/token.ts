@@ -4,33 +4,29 @@ import { insertData } from "../db/insertQuery";
 import { verifyClientData,verifyPkBearerToken} from '../validation/verifyFunctions'
 
 const createToken = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> =>{
-  try {
-    let addMongo: any,
+   let tokenReturned: string,
       verifyData:any;
-
-    const tokenPromise:string = await verifyPkBearerToken(event.headers.authorization)
-
+  try {
+    const tokenPromise = await verifyPkBearerToken(event.headers.authorization)
     if (event.body != null) {
-      addMongo = await insertData(JSON.parse(event.body),tokenPromise)
       verifyData = await verifyClientData(JSON.parse(event.body))
+      tokenReturned = await insertData(JSON.parse(event.body),tokenPromise.data)
     } else {
-      throw new Error("No hay un objeto data en los parametros");
+      throw {error:new Error("No hay un objeto data en los parametros"), statusCode:400}
     }
     return{
       statusCode: 200,
       body: JSON.stringify({
-        validator: verifyData,
-        token: tokenPromise,
-        mongo: addMongo
+        validator: verifyData.message,
+        token: tokenReturned
       }) 
     }
   } catch (error) {
     return {
-      statusCode: 500,
-      body: error.message
+      statusCode: error.statusCode,
+      body: error.error.message
     }
   }
- 
 }
 
 module.exports = {
