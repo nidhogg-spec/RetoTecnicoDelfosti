@@ -14,3 +14,5 @@
 
   En el caso de ls unit test asegurarse de añadirle las variables de entorno antes de ejecutar el npm test como se observa aca en el siguiente ejemplo, de igual manera el header authentication debe ser el mismo para el caso de los test tambien.
   ```DATABASE_PWD=RgKlvHbj5KzsS2Pz AUTH_KEY=pk_test_Dt4ZBItXSZT1EzmOd8yCxonL npm test```
+
+  Para la configuracion de AWS n caso de er nesesario se encuentra alojado en el codigo de region us-east-1
