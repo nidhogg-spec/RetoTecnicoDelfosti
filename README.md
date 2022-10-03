@@ -10,4 +10,4 @@
 
 
 ## Consideraciones
-  Asegurase que el valor del header de authenticacion sea el mismo que el de la variable de entorno AUTH_KEY del archivo serverless.yml, solo el valor de la llave sin considerar el prefijo del token, por ejemplo la llave con el prefijo seria `bearer pk_test_Dt4ZBItXSZT1EzmOd8yCxonL` solo asegurar similitud con `pk_test_Dt4ZBItXSZT1EzmOd8yCxonL`. Teniendo en cuenta esto el valor de la variable de entorno seria AUTH_KEY: `pk_test_Dt4ZBItXSZT1EzmOd8yCxonL`.
+  Asegurase que el valor del header de authenticacion sea el mismo que el de la variable de entorno AUTH_KEY del archivo serverless.yml, solo el valor de la llave sin considerar el prefijo del token, por ejemplo la llave con el prefijo seria `bearer pk_test_Dt4ZBItXSZT1EzmOd8yCxonL` solo asegurar similitud con `pk_test_Dt4ZBItXSZT1EzmOd8yCxonL`. Teniendo en cuenta esto el valor de la variable de entorno seria `AUTH_KEY: pk_test_Dt4ZBItXSZT1EzmOd8yCxonL`.
